@@ -1125,7 +1125,7 @@ def make_inverse_operator(info, forward, noise_cov, loose=0.2, depth=0.8,
         depth_prior = np.ones(gain.shape[1], dtype=gain.dtype)
 
     # Deal with fixed orientation forward / inverse
-    if loose is None:
+    if fixed:
         if depth is not None:
             # Convert the depth prior into a fixed-orientation one
             logger.info('    Picked elements from a free-orientation '
