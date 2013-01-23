@@ -117,11 +117,18 @@ def _compare_io(inv_op, out_file_ext='.fif'):
 
 class TestMakeInverseOperator:
     @classmethod
-    def setup(cls):
+    def setup_class(cls):
         cls.fwd_op = read_forward_solution(fname_fwd, surf_ori=True)
         cls.fwd_1 = read_forward_solution(fname_fwd, surf_ori=False)
         cls.fwd_2 = read_forward_solution(fname_fwd, force_fixed=True)
         cls.inv_op = read_inverse_operator(fname_inv)
+
+    @classmethod
+    def teardown_class(cls):
+        del cls.fwd_op
+        del cls.fwd_1
+        del cls.fwd_2
+        del cls.inv_op
 
     def test_apply_inverse_operator(self):
         """Test MNE inverse computation (precomputed and non-precomputed)
