@@ -1074,8 +1074,9 @@ def make_inverse_operator(info, forward, noise_cov, loose=0.2, depth=0.8,
     # loose=None and fixed=True: Make fixed
     #    depth=None, can use fixed fwd, depth=0<x<1 must use free ori
     if is_fixed_ori and not fixed:
-        raise ValueError('Cannot make inverse with fixed-orientation '
-                         'forward solution unless fixed is True.')
+        raise ValueError('Forward operator has fixed orientation and can only '
+                         'be used to make a fixed-orientation inverse '
+                         'operator.')
     if fixed and not (is_fixed_ori or forward['surf_ori']):
         raise ValueError('For a fixed orientation inverse solution, the '
                          'forward solution must be fixed-orientation '
@@ -1088,7 +1089,7 @@ def make_inverse_operator(info, forward, noise_cov, loose=0.2, depth=0.8,
     if loose is not None:
         if is_fixed_ori:
             raise ValueError('Forward operator has fixed orientation. A '
-                             'loose inverse operator (lose parameter other '
+                             'loose inverse operator (loose parameter other '
                              'than None) requires a surface-based, free '
                              'orientation forward operator.')
         if loose < 1 and not forward['surf_ori']:
