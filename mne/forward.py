@@ -568,7 +568,7 @@ def compute_orient_prior(forward, loose=0.2, verbose=None):
         orient_prior = np.ones(n_sources, dtype=np.float)
     else:
         orient_prior = np.ones(n_sources, dtype=np.float)
-        if loose is not None:
+        if (loose is not None) and (loose < 1):
             logger.info('Applying loose dipole orientations. Loose value '
                         'of %s.' % loose)
             orient_prior[np.mod(np.arange(n_sources), 3) != 2] *= loose
